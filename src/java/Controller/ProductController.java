@@ -105,4 +105,19 @@ public class ProductController extends BaseController {
         
         return this.preparedStatement(map, sql);
     }
+    
+    public ProductModel stock() throws SQLException{
+        ProductModel model = new ProductModel();
+        
+        String query = this.query.stock;
+        ResultSet rs = this.get(query);
+        
+        while(rs.next()) {
+            model.setStock(rs.getInt(1));
+            model.setReceived(rs.getInt(2));
+            model.setShipped(rs.getInt(3));
+        } 
+        
+        return model;
+    }
 }

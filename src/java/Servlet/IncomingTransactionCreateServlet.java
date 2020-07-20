@@ -5,8 +5,7 @@
  */
 package Servlet;
 
-import Controller.ProductController;
-import Model.ProductModel;
+import Controller.TransactionController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class IndexServlet extends HttpServlet {
+public class IncomingTransactionCreateServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,16 +34,10 @@ public class IndexServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ProductController pc = new ProductController();
-            ProductModel data = pc.stock();
-            
-            request.setAttribute("data", data);
-            
-            RequestDispatcher dispatch = request.getRequestDispatcher("/index.jsp");
-            dispatch.forward(request, response);
+            /* TODO output your page here. You may use following sample code. */
         }
     }
 
@@ -61,9 +54,17 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            processRequest(request, response);
+            TransactionController tc = new TransactionController();
+            ArrayList party = tc.getFactory();
+            ArrayList product = tc.getProduct();
+            
+            request.setAttribute("party", party);
+            request.setAttribute("product", product);
+            
+            RequestDispatcher dispatch = request.getRequestDispatcher("/incomingTransactionCreate.jsp");
+            dispatch.forward(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(IndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IncomingTransactionCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -78,11 +79,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(IndexServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

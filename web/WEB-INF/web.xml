@@ -20,6 +20,46 @@
         <servlet-name>ProductDeleteServlet</servlet-name>
         <servlet-class>Servlet.ProductDeleteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FactoryServlet</servlet-name>
+        <servlet-class>Servlet.FactoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FactoryDeleteServlet</servlet-name>
+        <servlet-class>Servlet.FactoryDeleteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FactoryCreateServlet</servlet-name>
+        <servlet-class>Servlet.FactoryCreateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FactoryEditServlet</servlet-name>
+        <servlet-class>Servlet.FactoryEditServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BranchServlet</servlet-name>
+        <servlet-class>Servlet.BranchServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BranchDeleteServlet</servlet-name>
+        <servlet-class>Servlet.BranchDeleteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BranchCreateServlet</servlet-name>
+        <servlet-class>Servlet.BranchCreateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BranchEditServlet</servlet-name>
+        <servlet-class>Servlet.BranchEditServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TransactionServlet</servlet-name>
+        <servlet-class>Servlet.TransactionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>IncomingTransactionCreateServlet</servlet-name>
+        <servlet-class>Servlet.IncomingTransactionCreateServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -40,9 +80,52 @@
         <servlet-name>ProductDeleteServlet</servlet-name>
         <url-pattern>/productDelete</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FactoryServlet</servlet-name>
+        <url-pattern>/factory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FactoryDeleteServlet</servlet-name>
+        <url-pattern>/factoryDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FactoryCreateServlet</servlet-name>
+        <url-pattern>/factoryCreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FactoryEditServlet</servlet-name>
+        <url-pattern>/factoryEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BranchServlet</servlet-name>
+        <url-pattern>/branch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BranchDeleteServlet</servlet-name>
+        <url-pattern>/branchDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BranchCreateServlet</servlet-name>
+        <url-pattern>/branchCreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BranchEditServlet</servlet-name>
+        <url-pattern>/branchEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TransactionServlet</servlet-name>
+        <url-pattern>/transaction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncomingTransactionCreateServlet</servlet-name>
+        <url-pattern>/incomingTransactionCreate</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
 </web-app>

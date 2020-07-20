@@ -17,4 +17,5 @@ public class ProductQuery {
     public String update = "UPDATE products SET name = ?,size = ?,label = ?,"
             + "type = ?,note = ? WHERE id = ?";
     public String delete = "DELETE FROM products WHERE id = ?";
+    public String stock = "SELECT SUM(stock), SUM(received), SUM(shipped) FROM products";
 }

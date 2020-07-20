@@ -9,7 +9,7 @@
 <html>
     <head>
         <jsp:include page='views/layout/head.jsp'>
-            <jsp:param name ="title" value="Create Product"/>
+            <jsp:param name ="title" value="Edit Product"/>
         </jsp:include>
     </head>
     <body>

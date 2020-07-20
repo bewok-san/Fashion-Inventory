@@ -5,8 +5,7 @@
  */
 package Servlet;
 
-import Controller.ProductController;
-import Model.ProductModel;
+import Controller.FactoryController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -23,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ASUS
  */
-public class IndexServlet extends HttpServlet {
+public class FactoryServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,12 +37,12 @@ public class IndexServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ProductController pc = new ProductController();
-            ProductModel data = pc.stock();
+            FactoryController fc = new FactoryController();
+            ArrayList data = fc.get();
             
             request.setAttribute("data", data);
             
-            RequestDispatcher dispatch = request.getRequestDispatcher("/index.jsp");
+            RequestDispatcher dispatch = request.getRequestDispatcher("/factory.jsp");
             dispatch.forward(request, response);
         }
     }
@@ -63,7 +62,7 @@ public class IndexServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(IndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FactoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -81,7 +80,7 @@ public class IndexServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(IndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FactoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

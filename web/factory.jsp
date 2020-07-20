@@ -10,7 +10,7 @@
 <html>
     <head>
         <jsp:include page='views/layout/head.jsp'>
-            <jsp:param name ="title" value="Product"/>
+            <jsp:param name ="title" value="Factory"/>
         </jsp:include>
     </head>
     <body>
@@ -19,7 +19,7 @@
         
             <div class="row">
                 <div class="col-4 pb-4">
-                    <a class="btn btn-sm btn-primary" href="productCreate">Create</a>
+                    <a class="btn btn-sm btn-primary" href="factoryCreate">Create</a>
                     <a class="btn btn-sm btn-primary" href="index">Index</a>
                 </div>
                 <div class="col-12">
@@ -28,12 +28,10 @@
                             <tr>
                                 <td>ID</td>
                                 <td>Name</td>
-                                <td>Size</td>
-                                <td>Label</td>
-                                <td>Type</td>
-                                <td>Stock</td>
-                                <td>Received</td>
-                                <td>Shipped</td>
+                                <td>Address</td>
+                                <td>City</td>
+                                <td>ZIP</td>
+                                <td>Contact</td>
                                 <td>Note</td>
                             </tr>
                         </thead>
@@ -42,20 +40,18 @@
                                 <tr>
                                     <td><p>${item.id}</p></td>
                                     <td><p>${item.name}</p></td>
-                                    <td><p>${item.size}</p></td>
-                                    <td><p>${item.label}</p></td>
-                                    <td><p>${item.type}</p></td>
-                                    <td><p>${item.stock}</p></td>
-                                    <td><p>${item.received}</p></td>
-                                    <td><p>${item.shipped}</p></td>
+                                    <td><p>${item.address}</p></td>
+                                    <td><p>${item.city}</p></td>
+                                    <td><p>${item.zip}</p></td>
+                                    <td><p>${item.contact}</p></td>
                                     <td><p>${item.note}</p></td>
                                     <td>
                                         <a class="btn btn-sm btn-primary" 
-                                           href="${pageContext.request.contextPath}/productEdit?id=${item.id}">
+                                           href="${pageContext.request.contextPath}/factoryEdit?id=${item.id}">
                                             Edit
                                         </a>
                                         <a class="btn btn-sm btn-danger" 
-                                           href="${pageContext.request.contextPath}/productDelete?id=${item.id}">
+                                           href="${pageContext.request.contextPath}/factoryDelete?id=${item.id}">
                                             Delete
                                         </a>
                                     </td>

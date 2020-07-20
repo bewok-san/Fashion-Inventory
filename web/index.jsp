@@ -20,9 +20,15 @@
                 <h2>Index</h2>
             </div>
             <div class="row">
-                <div class="col-4 pb-4">
-                    <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/product">Product</a>
-                </div>
+                <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/product">Product</a>
+                <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/factory">Factory</a>
+                <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/branch">Branch</a>
+                <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/transaction">Transaction</a>
+            </div>
+            <div class="row">
+                <p>Stock : ${data.stock}</p>
+                <p>Received : ${data.received}</p>
+                <p>Shipped : ${data.shipped}</p>
             </div>
             
         
