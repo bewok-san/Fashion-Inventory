@@ -5,15 +5,8 @@
  */
 package Servlet;
 
-import Controller.ProductController;
-import Model.ProductModel;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ASUS
  */
-public class IndexServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,24 +29,17 @@ public class IndexServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession(true);
             
-            if(session.getAttribute("auth") == null){
-                response.sendRedirect("login");
-            } else {
-                ProductController pc = new ProductController();
-                ProductModel data = pc.stock();
+            session.removeAttribute("id");
+            session.removeAttribute("username");
+            session.removeAttribute("password");
+            session.removeAttribute("auth");
             
-                request.setAttribute("data", data);
-            
-                RequestDispatcher dispatch = request.getRequestDispatcher("/index.jsp");
-                dispatch.forward(request, response);
-            }
-            
-            
+            response.sendRedirect("login");
         }
     }
 
@@ -69,11 +55,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(IndexServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -87,11 +69,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(IndexServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

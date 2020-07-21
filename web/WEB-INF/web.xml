@@ -60,6 +60,26 @@
         <servlet-name>IncomingTransactionCreateServlet</servlet-name>
         <servlet-class>Servlet.IncomingTransactionCreateServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>IncomingTransactionServlet</servlet-name>
+        <servlet-class>Servlet.IncomingTransactionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OutcomingTransactionServlet</servlet-name>
+        <servlet-class>Servlet.OutcomingTransactionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OutcomingTransactionCreateServlet</servlet-name>
+        <servlet-class>Servlet.OutcomingTransactionCreateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>Servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>Servlet.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern>/index</url-pattern>
@@ -119,6 +139,26 @@
     <servlet-mapping>
         <servlet-name>IncomingTransactionCreateServlet</servlet-name>
         <url-pattern>/incomingTransactionCreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>IncomingTransactionServlet</servlet-name>
+        <url-pattern>/incomingTransaction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OutcomingTransactionServlet</servlet-name>
+        <url-pattern>/outcomingTransaction</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OutcomingTransactionCreateServlet</servlet-name>
+        <url-pattern>/outcomingTransactionCreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

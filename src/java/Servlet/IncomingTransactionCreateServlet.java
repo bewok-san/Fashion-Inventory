@@ -6,6 +6,7 @@
 package Servlet;
 
 import Controller.TransactionController;
+import Model.TransactionModel;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -53,7 +55,12 @@ public class IncomingTransactionCreateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        HttpSession session = request.getSession(true);
+            
+        if(session.getAttribute("auth") == null){
+            response.sendRedirect("login");
+        } else {
+            try {
             TransactionController tc = new TransactionController();
             ArrayList party = tc.getFactory();
             ArrayList product = tc.getProduct();
@@ -65,6 +72,7 @@ public class IncomingTransactionCreateServlet extends HttpServlet {
             dispatch.forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(IncomingTransactionCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }
 
@@ -79,7 +87,30 @@ public class IncomingTransactionCreateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String party_id = request.getParameter("party_id");
+            String product_id = request.getParameter("product_id");
+            String amount = request.getParameter("amount");
+            String date = request.getParameter("date");
+            String type = request.getParameter("type");
+            
+            TransactionModel model = new TransactionModel();
+            model.setParty_id(party_id);
+            model.setProduct_id(product_id);
+            model.setAmount(Integer.parseInt(amount));
+            model.setDate(date);
+            model.setType(type);
+            
+            TransactionController tc = new TransactionController();
+            boolean check = tc.createIncoming(model);
+            
+            if(check) {
+                //go to index page
+                response.sendRedirect("incomingTransaction");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IncomingTransactionCreateServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

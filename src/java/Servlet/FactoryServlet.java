@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,13 +38,19 @@ public class FactoryServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            FactoryController fc = new FactoryController();
-            ArrayList data = fc.get();
+            HttpSession session = request.getSession(true);
             
-            request.setAttribute("data", data);
+            if(session.getAttribute("auth") == null){
+                response.sendRedirect("login");
+            } else {
+                FactoryController fc = new FactoryController();
+                ArrayList data = fc.get();
             
-            RequestDispatcher dispatch = request.getRequestDispatcher("/factory.jsp");
-            dispatch.forward(request, response);
+                request.setAttribute("data", data);
+            
+                RequestDispatcher dispatch = request.getRequestDispatcher("/factory.jsp");
+                dispatch.forward(request, response);
+            }
         }
     }
 

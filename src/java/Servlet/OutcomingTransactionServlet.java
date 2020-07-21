@@ -5,8 +5,7 @@
  */
 package Servlet;
 
-import Controller.ProductController;
-import Model.ProductModel;
+import Controller.TransactionController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ASUS
  */
-public class IndexServlet extends HttpServlet {
+public class OutcomingTransactionServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,16 +43,14 @@ public class IndexServlet extends HttpServlet {
             if(session.getAttribute("auth") == null){
                 response.sendRedirect("login");
             } else {
-                ProductController pc = new ProductController();
-                ProductModel data = pc.stock();
+                TransactionController tc = new TransactionController();
+                ArrayList data = tc.getOutcoming();
             
                 request.setAttribute("data", data);
             
-                RequestDispatcher dispatch = request.getRequestDispatcher("/index.jsp");
+                RequestDispatcher dispatch = request.getRequestDispatcher("/outcomingTransaction.jsp");
                 dispatch.forward(request, response);
             }
-            
-            
         }
     }
 
@@ -72,7 +69,7 @@ public class IndexServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(IndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OutcomingTransactionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -90,7 +87,7 @@ public class IndexServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(IndexServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OutcomingTransactionServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

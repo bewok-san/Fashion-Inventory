@@ -10,7 +10,7 @@
 <html>
     <head>
         <jsp:include page='views/layout/head.jsp'>
-            <jsp:param name ="title" value="Transaction"/>
+            <jsp:param name ="title" value="Incoming Transaction"/>
         </jsp:include>
     </head>
     <body>
@@ -19,8 +19,7 @@
         
             <div class="row">
                 <div class="col-4 pb-4">
-                    <a class="btn btn-sm btn-primary" href="incomingTransaction">Incoming Transaction</a>
-                    <a class="btn btn-sm btn-primary" href="outcomingTransaction">Outcoming Transaction</a>
+                    <a class="btn btn-sm btn-primary" href="incomingTransactionCreate">Incoming Create</a>
                     <a class="btn btn-sm btn-primary" href="index">Index</a>
                 </div>
                 <div class="col-12">

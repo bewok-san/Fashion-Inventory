@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.BranchModel;
 import Model.FactoryModel;
 import Model.ProductModel;
 import Model.TransactionModel;
@@ -26,6 +27,48 @@ public class TransactionController extends BaseController {
     
     public ArrayList get() throws SQLException{
         String query = this.query.get;
+        ResultSet rs = this.get(query);
+        
+        while(rs.next()) {
+            TransactionModel model = new TransactionModel();
+            model.setId(rs.getString(1));
+            model.setParty_id(rs.getString(2));
+            model.setParty_name(rs.getString(3));
+            model.setProduct_id(rs.getString(4));
+            model.setProduct_name(rs.getString(5));
+            model.setAmount(rs.getInt(6));
+            model.setDate(rs.getString(7));
+            model.setType(rs.getString(8));
+            
+            arraylist.add(model);
+        }
+        
+        return arraylist;
+    }
+    
+    public ArrayList getIncoming() throws SQLException{
+        String query = this.query.getIncoming;
+        ResultSet rs = this.get(query);
+        
+        while(rs.next()) {
+            TransactionModel model = new TransactionModel();
+            model.setId(rs.getString(1));
+            model.setParty_id(rs.getString(2));
+            model.setParty_name(rs.getString(3));
+            model.setProduct_id(rs.getString(4));
+            model.setProduct_name(rs.getString(5));
+            model.setAmount(rs.getInt(6));
+            model.setDate(rs.getString(7));
+            model.setType(rs.getString(8));
+            
+            arraylist.add(model);
+        }
+        
+        return arraylist;
+    }
+    
+    public ArrayList getOutcoming() throws SQLException{
+        String query = this.query.getOutcoming;
         ResultSet rs = this.get(query);
         
         while(rs.next()) {
@@ -84,6 +127,21 @@ public class TransactionController extends BaseController {
         return arraylist;
     }
     
+    public ArrayList getBranch() throws SQLException{
+        String query = this.query.getBranch;
+        ResultSet rs = this.get(query);
+        
+        while(rs.next()) {
+            BranchModel model = new BranchModel();
+            model.setId(rs.getString("id"));
+            model.setName(rs.getString("name"));
+            
+            arraylist.add(model);
+        }
+        
+        return arraylist;
+    }
+    
     public ArrayList getProduct() throws SQLException{
         String query = this.query.getProduct;
         ResultSet rs = this.get(query);
@@ -92,6 +150,7 @@ public class TransactionController extends BaseController {
             ProductModel model = new ProductModel();
             model.setId(rs.getString("id"));
             model.setName(rs.getString("name"));
+            model.setStock(rs.getInt("stock"));
             
             arraylist2.add(model);
         }

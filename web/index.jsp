@@ -20,6 +20,9 @@
                 <h2>Index</h2>
             </div>
             <div class="row">
+                <div class="col-12 pb-3">
+                    <p>Hello, <% out.print(session.getAttribute("username")); %></p>
+                </div>
                 <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/product">Product</a>
                 <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/factory">Factory</a>
                 <a class="btn btn-sm btn-primary" href="${pageContext.request.contextPath}/branch">Branch</a>

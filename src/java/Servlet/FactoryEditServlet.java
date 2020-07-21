@@ -17,6 +17,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -53,7 +54,12 @@ public class FactoryEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        HttpSession session = request.getSession(true);
+            
+        if(session.getAttribute("auth") == null){
+            response.sendRedirect("login");
+        } else {
+            try {
             String id = request.getParameter("id");
             
             FactoryController fc = new FactoryController();
@@ -65,6 +71,7 @@ public class FactoryEditServlet extends HttpServlet {
             dispatch.forward(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(FactoryEditServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }
 
