@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2020 at 02:26 PM
+-- Generation Time: Jul 22, 2020 at 09:33 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -32,6 +32,13 @@ CREATE TABLE `admin` (
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`) VALUES
+(1, 'admin1', 'admin1');
 
 -- --------------------------------------------------------
 
@@ -83,8 +90,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `size`, `label`, `type`, `stock`, `received`, `shipped`, `note`) VALUES
-(1, 'Victor Shirt Badminton', 'XL', 'Victor Shirt Badminton [T-95010 F]', 'Shirt', 10, 0, 0, 'Polyester Material'),
-(2, 'Adidas AlphaBounce ', '42', 'Adidas AlphaBounce Sneaker', 'Shoes', 5, 12, 0, 'Made in Vietnam');
+(1, 'Victor Shirt Badminton', 'XL', 'Victor Shirt Badminton [T-95010 F]', 'Shirt', 4, 6, 2, 'Polyester Material'),
+(2, 'Adidas AlphaBounce ', '42', 'Adidas AlphaBounce Sneaker', 'Shoes', 0, 0, 0, 'Made in Vietnam');
 
 -- --------------------------------------------------------
 
@@ -106,7 +113,72 @@ CREATE TABLE `transaction` (
 --
 
 INSERT INTO `transaction` (`id`, `party_id`, `product_id`, `amount`, `date`, `type`) VALUES
-(1, 2, 1, 5, '2020-07-20', 'Incoming');
+(8, 2, 1, 6, '2020-07-22', 'Incoming'),
+(9, 4, 1, 2, '2020-07-22', 'Outcoming');
+
+--
+-- Triggers `transaction`
+--
+DELIMITER $$
+CREATE TRIGGER `checkStock` BEFORE INSERT ON `transaction` FOR EACH ROW BEGIN
+    DECLARE vstock INT(255);
+    SET vstock = (SELECT stock from products WHERE id = new.product_id) ;
+                        
+    IF new.type = 'Outcoming' THEN
+    IF new.amount > vstock THEN
+        SIGNAL SQLSTATE '45000' 
+            SET MESSAGE_TEXT = "check the stock carefully!";
+    END IF;
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `updateStock` AFTER INSERT ON `transaction` FOR EACH ROW IF new.type = 'Incoming' THEN
+UPDATE products SET stock = stock + new.amount, received = received + new.amount WHERE id = new.product_id;
+ELSEIF new.type = 'Outcoming' THEN
+UPDATE products SET stock = stock - new.amount, shipped = shipped + new.amount WHERE id = new.product_id;
+END IF
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `updateStock2` AFTER UPDATE ON `transaction` FOR EACH ROW IF NEW
+    .type = 'Incoming' THEN 
+    IF NEW.amount > old.amount THEN
+UPDATE
+    products
+SET
+    stock = (NEW.amount - old.amount) + stock ,
+    received = (NEW.amount - old.amount) + received 
+WHERE
+    id = NEW.product_id; ELSEIF NEW.amount < old.amount THEN
+UPDATE
+    products
+SET
+    stock = (old.amount - NEW.amount) - stock,
+    received = (old.amount - NEW.amount) -received
+WHERE
+    id = NEW.product_id;
+END IF; ELSEIF NEW.type = 'Outcoming' THEN 
+IF NEW.amount > old.amount THEN
+UPDATE
+    products
+SET
+    stock = (NEW.amount - old.amount) - stock ,
+    shipped = (NEW.amount - old.amount) + shipped
+WHERE
+    id = NEW.product_id; ELSEIF NEW.amount < old.amount THEN
+UPDATE
+    products
+SET
+    stock = (old.amount - NEW.amount) + stock ,
+    shipped = shipped - (old.amount - NEW.amount) 
+WHERE
+    id = NEW.product_id;
+END IF;
+END IF
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -144,7 +216,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `party`
@@ -162,7 +234,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
