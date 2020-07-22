@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2020 at 09:33 AM
+-- Generation Time: Jul 22, 2020 at 01:35 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -91,7 +91,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `size`, `label`, `type`, `stock`, `received`, `shipped`, `note`) VALUES
 (1, 'Victor Shirt Badminton', 'XL', 'Victor Shirt Badminton [T-95010 F]', 'Shirt', 4, 6, 2, 'Polyester Material'),
-(2, 'Adidas AlphaBounce ', '42', 'Adidas AlphaBounce Sneaker', 'Shoes', 0, 0, 0, 'Made in Vietnam');
+(2, 'Adidas AlphaBounce ', '42', 'Adidas AlphaBounce Sneaker', 'Shoes', 5, 20, 15, 'Made in Vietnam');
 
 -- --------------------------------------------------------
 
@@ -114,7 +114,9 @@ CREATE TABLE `transaction` (
 
 INSERT INTO `transaction` (`id`, `party_id`, `product_id`, `amount`, `date`, `type`) VALUES
 (8, 2, 1, 6, '2020-07-22', 'Incoming'),
-(9, 4, 1, 2, '2020-07-22', 'Outcoming');
+(9, 4, 1, 2, '2020-07-22', 'Outcoming'),
+(10, 3, 2, 20, '2020-07-22', 'Incoming'),
+(11, 4, 2, 15, '2020-07-22', 'Outcoming');
 
 --
 -- Triggers `transaction`
@@ -222,19 +224,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `party`
 --
 ALTER TABLE `party`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `transaction`
 --
 ALTER TABLE `transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

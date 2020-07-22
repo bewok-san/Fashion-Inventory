@@ -46,8 +46,10 @@ public class IndexServlet extends HttpServlet {
             } else {
                 ProductController pc = new ProductController();
                 ProductModel data = pc.stock();
+                ArrayList product = pc.get();
             
                 request.setAttribute("data", data);
+                request.setAttribute("product", product);
             
                 RequestDispatcher dispatch = request.getRequestDispatcher("/index.jsp");
                 dispatch.forward(request, response);

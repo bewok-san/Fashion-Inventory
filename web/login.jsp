@@ -9,39 +9,52 @@
 <html>
     <head>
         <jsp:include page='views/layout/head.jsp'>
-            <jsp:param name="title" value="Hello World"></jsp:param>
+            <jsp:param name="title" value="Login Page"></jsp:param>
         </jsp:include>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>
     </head>
-    <body>
-        <div class='container pt-4'>
-            <div class="row">
-                <div class="col-4">
-                    <% if(request.getAttribute("alert") != null) { %>
+    <body class="hold-transition login-page">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="#"><b>Admin</b> Inventory</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card">
+    <div class="card-body login-card-body">
+      <p class="login-box-msg">Sign in to start your session</p>
+      <% if(request.getAttribute("alert") != null) { %>
                         <div class="alert alert-danger">
                             <% out.print(request.getAttribute("alert")); %>
                         </div>
                     <% } %>
-                    <form action="login" method="POST">
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input class="form-control" type="text" 
-                                   name="username" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input class="form-control" type="password" 
-                                   name="password" required>
-                        </div>
-                        <div class="form-group">
-                            <button class="btn btn-sm btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
+      <form action="login" method="post">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Username" name="username" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
             </div>
-            <jsp:include page='views/layout/footer.jsp'></jsp:include>
+          </div>
         </div>
-        <jsp:include page='views/layout/scripts.jsp'></jsp:include>      
-    </body>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password" name="password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
+</div>
+<!-- /.login-box -->=
 </html>
 
